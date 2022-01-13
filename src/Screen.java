@@ -3,6 +3,7 @@ package src;
 import java.util.Random;
 
 public class Screen extends Render {
+	private Game game;
 	private Render test;
 	private Render3D render;
 	
@@ -22,7 +23,7 @@ public class Screen extends Render {
 		}
 		int anim = (int) (Math.sin(game.time % 1000.0 / 1000 * Math.PI * 2) * 100);
 		
-		render.floor();
+		render.floor(game);
 		draw(render, 0, 0);
 	}
 }
