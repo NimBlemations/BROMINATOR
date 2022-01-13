@@ -29,6 +29,7 @@ public class Display extends Canvas implements Runnable {
 		setPreferredSize(size);
 		setMinimumSize(size);
 		setMaximumSize(size);
+		
 		screen = new Screen(WIDTH, HEIGHT);
 		game = new Game();
 		img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
