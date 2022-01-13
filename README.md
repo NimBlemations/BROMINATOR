@@ -1,2 +1,2 @@
 # BROMINATOR: The game
-I seriously love this idea.
+This is planned to be an advanced 3D Java game.
