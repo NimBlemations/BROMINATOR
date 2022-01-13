@@ -14,7 +14,7 @@ public class Render3D extends Render {
 				double xDepth = x - width / 2;
 				xDepth *= z;
 				int xx = (int) (xDepth);
-				pixels[x + y * width] = xx;
+				pixels[x + y * width] = xx * 256;
 			}
 		}
 	}
