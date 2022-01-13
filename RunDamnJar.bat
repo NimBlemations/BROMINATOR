@@ -1,0 +1,1 @@
+java -jar bin/BROMINATOR.jar > runjar.log 2> fuckyrunjar.log

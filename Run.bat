@@ -1,0 +1,1 @@
+java src/Display > run.log 2> fuckyrun.log

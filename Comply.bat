@@ -1,0 +1,1 @@
+javac src/*.java > comply.log 2> fuckycomply.log
