@@ -1,1 +1,1 @@
-jar cmvf META-INF/MANIFEST.MF bin/BROMINATOR.jar src/*.class > jar.log 2> fuckyjar.log
+jar cmvf META-INF/MANIFEST.MF bin/BROMINATOR.jar src/*.class > jar.log 2> dumbjar.log

@@ -1,1 +1,1 @@
-java src/Display > run.log 2> fuckyrun.log
+java src/Display > run.log 2> dumbrun.log

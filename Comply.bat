@@ -1,1 +1,1 @@
-javac src/*.java > comply.log 2> fuckycomply.log
+javac src/*.java > comply.log 2> dumbcomply.log
