@@ -1,1 +1,1 @@
-javac src/*.java > comply.log 2> dumbcomply.log
+javac -d bin/class -classpath src src/*.java > comply.log 2> dumbcomply.log

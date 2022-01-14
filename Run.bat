@@ -1,1 +1,1 @@
-java src/Display > run.log 2> dumbrun.log
+java -cp bin/class Display > run.log 2> dumbrun.log
