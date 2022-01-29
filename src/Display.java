@@ -17,7 +17,7 @@ public class Display extends Canvas implements Runnable {
 	public static final int HEIGHT = 720;
 	private static boolean running = false;
 	
-	private MyPolygon poly;
+	private Tetrahedron tetra;
 	
 	public Display() {
 		this.frame = new JFrame();
@@ -88,7 +88,23 @@ public class Display extends Canvas implements Runnable {
 	}
 	
 	private void init() {
-		this.poly = new MyPolygon(Color.CYAN, new MyPoint(0, 100, 0), new MyPoint(0, 0, 0), new MyPoint(0, 50, 50));
+		int s = 100;
+		MyPoint p1 =  new MyPoint(s/2, -s/2, -s/2);
+		MyPoint p2 =  new MyPoint(s/2, s/2, -s/2);
+		MyPoint p3 =  new MyPoint(s/2, s/2, s/2);
+		MyPoint p4 =  new MyPoint(s/2, -s/2, s/2);
+		MyPoint p5 =  new MyPoint(-s/2, -s/2, -s/2);
+		MyPoint p6 =  new MyPoint(-s/2, s/2, -s/2);
+		MyPoint p7 =  new MyPoint(-s/2, s/2, s/2);
+		MyPoint p8 =  new MyPoint(-s/2, -s/2, s/2);
+		this.tetra = new Tetrahedron(
+			Color.BLUE,
+			new MyPolygon(Color.RED, p1, p2, p3, p4),
+			new MyPolygon(Color.BLUE, p5, p6, p7, p8),
+			new MyPolygon(Color.WHITE, p1, p2, p5, p6),
+			new MyPolygon(Color.YELLOW, p1, p5, p8, p4),
+			new MyPolygon(Color.GREEN, p2, p6, p7, p3),
+			new MyPolygon(Color.ORANGE, p4, p3, p7, p8));
 	}
 	
 	private void render() {
@@ -103,7 +119,7 @@ public class Display extends Canvas implements Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		poly.render(g);
+		tetra.render(g);
 		
 		g.dispose();
 		bs.show();

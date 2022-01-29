@@ -5,13 +5,19 @@ public class Tetrahedron {
 	private MyPolygon[] polygons;
 	private Color color;
 	
-	private Tetrahedron(Color color, MyPolygon... polygons) {
+	public Tetrahedron(Color color, MyPolygon... polygons) {
 		this.color = color;
+		this.polygons = polygons;
+		this.setPolygonsColor();
+	}
+	
+	public Tetrahedron(MyPolygon... polygons) {
+		this.color = Color.WHITE;
 		this.polygons = polygons;
 	}
 	
-	private void render(Graphics g) {
-		for(MyPolygons poly : this.polygons) {
+	public void render(Graphics g) {
+		for(MyPolygon poly : this.polygons) {
 			poly.render(g);
 		}
 	}
@@ -21,7 +27,7 @@ public class Tetrahedron {
 	}
 	
 	private void setPolygonsColor() {
-		for(MyPolygons poly : this.polygons) {
+		for(MyPolygon poly : this.polygons) {
 			poly.setColor(this.color);
 		}
 	}

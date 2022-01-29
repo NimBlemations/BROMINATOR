@@ -16,6 +16,15 @@ public class MyPolygon {
 		}
 	}
 	
+	public MyPolygon(MyPoint... points) {
+		this.color = Color.WHITE;
+		this.points = new MyPoint[points.length];
+		for(int i = 0; i < points.length; i++) {
+			MyPoint p = points[i];
+			this.points[i] = new MyPoint(p.x, p.y, p.z);
+		}
+	}
+	
 	public void render(Graphics g) {
 		Polygon poly = new Polygon();
 		for(int i = 0; i < this.points.length; i++) {
