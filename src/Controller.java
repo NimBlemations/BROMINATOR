@@ -2,6 +2,9 @@ public class Controller {
 	public double x, y, z, rotation, xa, za, rotationa;
 	public static boolean turnLeft = false;
 	public static boolean turnRight = false;
+	public static boolean walk = false;
+	public static boolean crouchWalk = false;
+	public static boolean runWalk = false;
 	
 	public void tick(boolean forward, boolean back, boolean left, boolean right, boolean jump, boolean crouch, boolean run) {
 		double rotationSpeed = 0.025;
@@ -13,18 +16,22 @@ public class Controller {
 		
 		if(forward) {
 			zMove++;
+			walk = true;
 		}
 		
 		if(back) {
 			zMove--;
+			walk = true;
 		}
 		
 		if(left) {
 			xMove--;
+			walk = true;
 		}
 		
 		if(right) {
 			xMove++;
+			walk = true;
 		}
 		
 		if(turnLeft) {
@@ -37,14 +44,31 @@ public class Controller {
 		
 		if(jump) {
 			y += jumpHeight;
+			run = false;
 		}
 		
 		if(crouch) {
 			y -= crouchHeight;
+			run = false;
+			crouchWalk = true;
 		}
 		
 		if(run) {
 			walkSpeed = 1;
+			runWalk = true;
+		}
+		
+		if(!forward && !back && !left && !right) {
+			walk = false;
+			runWalk = false;
+		}
+		
+		if(!crouch) {
+			crouchWalk = false;
+		}
+		
+		if(!run) {
+			runWalk = false;
 		}
 		
 		xa += (xMove * Math.cos(rotation) + zMove * Math.sin(rotation)) * walkSpeed;

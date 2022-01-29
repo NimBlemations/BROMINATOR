@@ -149,7 +149,8 @@ public class Display extends Canvas implements Runnable {
 		try {
 			g.setFont(new Font("Comic Sans MS", 1, 20));
 		}catch(Exception e) {
-			System.out.println("Font not found!!!");
+			System.out.println("Font not found!!! Using Times New Roman...");
+			g.setFont(new Font("Times New Roman", 1, 20));
 		}
 		g.setColor(Color.WHITE);
 		g.drawString(fps + " FPS", 20, 20);
