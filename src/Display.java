@@ -1,183 +1,107 @@
-//Big thanks to "The Cherno" for his "3D Game Programming in Java".
+//Thanks to MeanRollerCoding's "[Java] 3D Rendering" tutorial!
+
 import java.awt.Canvas;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.Toolkit;
 
-import java.awt.image.BufferedImage;
 import java.awt.image.BufferStrategy;
-import java.awt.image.DataBufferInt;
 
 import javax.swing.JFrame;
 
 public class Display extends Canvas implements Runnable {
-	public static final int WIDTH = 1280;
-	public static final int HEIGHT = 720;
-	public static final String TITLE = "BROMINATOR";
-	
 	private Thread thread;
-	private Screen screen;
-	private Game game;
-	private BufferedImage img;
-	private Render render;
-	private boolean running = false;
-	private int[] pixels;
-	private InputHandler input;
-	private int newX = 0;
-	private int oldX = 0;
-	private int fps;
-	
-	private String loosey; //Righty, Lefty, Stilly
+	private JFrame frame;
+	private static String title = "BROMINATOR";
+	private static final int WIDTH = 1280;
+	private static final int HEIGHT = 720;
+	private static boolean running = false;
 	
 	public Display() {
+		this.frame = new JFrame();
+		
 		Dimension size = new Dimension(WIDTH, HEIGHT);
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		
-		screen = new Screen(WIDTH, HEIGHT);
-		game = new Game();
-		img = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
-		pixels = ((DataBufferInt)img.getRaster().getDataBuffer()).getData();
-		
-		input = new InputHandler();
-		addKeyListener(input);
-		addFocusListener(input);
-		addMouseListener(input);
-		addMouseMotionListener(input);
-		
+		this.setPreferredSize(size);
 	}
 	
-	private void start() {
-		if(running)
-			return;
+	public static void main(String[] args) {
+		Display display = new Display();
+		display.frame.setTitle(title);
+		display.frame.add(display);
+		display.frame.pack();
+		display.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		display.frame.setLocationRelativeTo(null);
+		display.frame.setResizable(false);
+		display.frame.setVisible(true);
+		
+		display.start();
+	}
+	
+	public synchronized void start() {
 		running = true;
-		thread = new Thread(this);
-		thread.start();
-		
-		System.out.println("Start!");
+		this.thread = new Thread(this, "Display");
+		this.thread.start();
 	}
 	
-	private void stop() {
-		if(!running)
-			return;
+	public synchronized void stop() {
 		running = false;
 		try {
-		thread.join();
-		} catch (Exception e) {
+			this.thread.join();
+		}catch(InterruptedException e) {
 			e.printStackTrace();
-			System.exit(0);
 		}
+		
 	}
 	
+	@Override
 	public void run() {
+		long lastTime = System.nanoTime();
+		long timer = System.currentTimeMillis();
+		final double ns = 1000000000.0 / 60;
+		double delta = 0;
 		int frames = 0;
-		double unprocessedSeconds = 0;
-		long previousTime = System.nanoTime();
-		double secondsPerTick = 1 / 60.0;
-		int tickCount = 0;
-		boolean ticked = false;
 		
 		while(running) {
-			long currentTime =  System.nanoTime();
-			long passedTime = currentTime - previousTime;
-			previousTime = currentTime;
-			unprocessedSeconds += passedTime / 1000000000.0;
-			
-			while(unprocessedSeconds > secondsPerTick) {
-				tick();
-				unprocessedSeconds -= secondsPerTick;
-				ticked = true;
-				tickCount++;
-				if(tickCount % 60 == 0) {
-					System.out.println(frames + "fps");
-					fps = frames;
-					previousTime += 1000;
-					frames = 0;
-				}
-			}
-			if(ticked) {
-				render();
-				frames++;
+			long now = System.nanoTime();
+			delta += (now - lastTime) / ns;
+			lastTime = now;
+			while(delta >= 1) {
+				update();
+				delta--;
 			}
 			render();
 			frames++;
 			
-			newX = InputHandler.MouseX;
-			if(newX > oldX) {
-				loosey = "Righty"; //String loosey
-				Controller.turnRight = true;
-				Controller.turnLeft = false;
+			if(System.currentTimeMillis() - timer > 1000) {
+				timer += 1000;
+				this.frame.setTitle(title + " | " + frames + " fps");
+				frames = 0;
 			}
-			if(newX < oldX) {
-				loosey = "Lefty"; //String loosey
-				Controller.turnLeft = true;
-				Controller.turnRight = false;
-			}
-			if(newX == oldX) {
-				loosey = "Stilly"; //String loosey
-				Controller.turnLeft = false;
-				Controller.turnRight = false;
-			}
-			oldX = newX;
 		}
-	}
-	
-	private void tick() {
-		game.tick(input.key);
+		
+		stop();
 	}
 	
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
-			createBufferStrategy(3);
+			this.createBufferStrategy(3);
 			return;
 		}
 		
-		screen.render(game);
-		
-		for(int i = 0; i < WIDTH * HEIGHT; i++) {
-			pixels[i] = screen.pixels[i];
-		}
-		
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
-		try {
-			g.setFont(new Font("Comic Sans MS", 1, 20));
-		}catch(Exception e) {
-			System.out.println("Font not found!!! Using Times New Roman...");
-			g.setFont(new Font("Times New Roman", 1, 20));
-		}
-		g.setColor(Color.WHITE);
-		g.drawString(fps + " FPS", 20, 20);
-		g.drawString(loosey, 100, 20); //String loosey
+		
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		
+		g.setColor(Color.RED);
+		g.fillRect(50, 100, 200, 200);
+		
 		g.dispose();
 		bs.show();
-		
 	}
 	
-	public static void main (String[] args) {
-		BufferedImage cursor = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-		Cursor blank = Toolkit.getDefaultToolkit().createCustomCursor(cursor, new Point(0, 0), "blank");
-		Display game = new Display();
-		JFrame frame = new JFrame();
-		frame.add(game);
-		frame.pack();
-		frame.getContentPane().setCursor(blank);
-		frame.setTitle(TITLE);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(WIDTH, HEIGHT);
-		frame.setLocationRelativeTo(null);
-		frame.setResizable(false);
-		frame.setVisible(true);
+	private void update() {
 		
-		System.out.println("'BROMINATOR: The game', inspired by my brother's username and nerd brain!");
-		System.out.println("Game created by Axel Annand.");
-		
-		game.start();
 	}
 }
