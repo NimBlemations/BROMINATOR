@@ -4,9 +4,11 @@ import java.awt.Point;
 import java.awt.Polygon;
 
 public class MyPolygon {
+	private Color color;
 	private MyPoint[] points;
 	
-	public MyPolygon(MyPoint... points) {
+	public MyPolygon(Color color, MyPoint... points) {
+		this.color = color;
 		this.points = new MyPoint[points.length];
 		for(int i = 0; i < points.length; i++) {
 			MyPoint p = points[i];
@@ -16,11 +18,15 @@ public class MyPolygon {
 	
 	public void render(Graphics g) {
 		Polygon poly = new Polygon();
-		for(int i = 0; i < points.length; i++) {
-			Point p = PointConverter.convertPoint(points[i]);
+		for(int i = 0; i < this.points.length; i++) {
+			Point p = PointConverter.convertPoint(this.points[i]);
 			poly.addPoint(p.x, p.y);
 		}
-		g.setColor(Color.WHITE);
+		g.setColor(color);
 		g.fillPolygon(poly);
+	}
+	
+	public void setColor(Color color) {
+		this.color = color;
 	}
 }

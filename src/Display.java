@@ -17,6 +17,8 @@ public class Display extends Canvas implements Runnable {
 	public static final int HEIGHT = 720;
 	private static boolean running = false;
 	
+	private MyPolygon poly;
+	
 	public Display() {
 		this.frame = new JFrame();
 		
@@ -62,6 +64,8 @@ public class Display extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 		
+		init();
+		
 		while(running) {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -83,6 +87,10 @@ public class Display extends Canvas implements Runnable {
 		stop();
 	}
 	
+	private void init() {
+		this.poly = new MyPolygon(Color.CYAN, new MyPoint(0, 100, 0), new MyPoint(0, 0, 0), new MyPoint(0, 50, 50));
+	}
+	
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy();
 		if(bs == null) {
@@ -95,7 +103,6 @@ public class Display extends Canvas implements Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		MyPolygon poly = new MyPolygon(new MyPoint(0, 100, 0), new MyPoint(0, 0, 0), new MyPoint(0, 50, 50));
 		poly.render(g);
 		
 		g.dispose();
