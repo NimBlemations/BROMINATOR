@@ -100,7 +100,7 @@ public class Display extends Canvas implements Runnable {
 		this.tetra = new Tetrahedron(
 			new MyPolygon(Color.RED, p1, p2, p3, p4),
 			new MyPolygon(Color.BLUE, p5, p6, p7, p8),
-			new MyPolygon(Color.WHITE, p1, p2, p5, p6),
+			new MyPolygon(Color.WHITE, p1, p2, p6, p5),
 			new MyPolygon(Color.YELLOW, p1, p5, p8, p4),
 			new MyPolygon(Color.GREEN, p2, p6, p7, p3),
 			new MyPolygon(Color.ORANGE, p4, p3, p7, p8));
