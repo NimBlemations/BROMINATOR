@@ -1,7 +1,10 @@
 //Big thanks to "The Cherno" for his "3D Game Programming in Java".
 import java.awt.Canvas;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Toolkit;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.BufferStrategy;
@@ -141,10 +144,13 @@ public class Display extends Canvas implements Runnable {
 	}
 	
 	public static void main (String[] args) {
+		BufferedImage cursor = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		Cursor blank = Toolkit.getDefaultToolkit().createCustomCursor(cursor, new Point(0, 0), "blank");
 		Display game = new Display();
 		JFrame frame = new JFrame();
 		frame.add(game);
 		frame.pack();
+		frame.getContentPane().setCursor(blank);
 		frame.setTitle(TITLE);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(WIDTH, HEIGHT);
