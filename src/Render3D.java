@@ -60,7 +60,7 @@ public class Render3D extends Render {
 			int g =  (colour >> 8) & 0xff;
 			int b = (colour) & 0xff;
 			
-			//Thanks to gossfunkel for being a commenter in Episode 13 of "3D Game Programming" for suggesting ">>> 8" instead of "/ 255"
+			//Thanks to gossfunkel for their comment in Episode 13 of "3D Game Programming" for suggesting ">>> 8" instead of "/ 255"
 			r = r * brightness >>> 8;
 			g = g * brightness >>> 8;
 			b = b * brightness >>> 8;
