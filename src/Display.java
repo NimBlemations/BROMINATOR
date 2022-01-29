@@ -1,4 +1,4 @@
-//Thanks to MeanRollerCoding's "[Java] 3D Rendering" tutorial!
+//Big thanks to MeanRollerCoding's "[Java] 3D Rendering" tutorial!
 
 import java.awt.Canvas;
 import java.awt.Color;
@@ -13,8 +13,8 @@ public class Display extends Canvas implements Runnable {
 	private Thread thread;
 	private JFrame frame;
 	private static String title = "BROMINATOR";
-	private static final int WIDTH = 1280;
-	private static final int HEIGHT = 720;
+	public static final int WIDTH = 1280;
+	public static final int HEIGHT = 720;
 	private static boolean running = false;
 	
 	public Display() {
@@ -49,6 +49,7 @@ public class Display extends Canvas implements Runnable {
 			this.thread.join();
 		}catch(InterruptedException e) {
 			e.printStackTrace();
+			System.exit(0);
 		}
 		
 	}
@@ -94,8 +95,8 @@ public class Display extends Canvas implements Runnable {
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, WIDTH, HEIGHT);
 		
-		g.setColor(Color.RED);
-		g.fillRect(50, 100, 200, 200);
+		MyPolygon poly = new MyPolygon(new MyPoint(0, 100, 0), new MyPoint(0, 0, 0), new MyPoint(0, 50, 50));
+		poly.render(g);
 		
 		g.dispose();
 		bs.show();
