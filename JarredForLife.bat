@@ -1,1 +1,1 @@
-jar cmvf META-INF/MANIFEST.MF bin/BROMINATOR.jar -C bin/class . -C res . > jar.log 2> dumbjar.log
+jar cmvf META-INF/MANIFEST.MF bin/BROMINATOR.jar -C bin/class . -C . res > jar.log 2> dumbjar.log
