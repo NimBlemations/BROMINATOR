@@ -2,6 +2,7 @@
 import java.awt.Canvas;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -105,10 +106,12 @@ public class Display extends Canvas implements Runnable {
 			if(newX > oldX) {
 				System.out.println("Righty");
 				Controller.turnRight = true;
+				Controller.turnLeft = false;
 			}
 			if(newX < oldX) {
 				System.out.println("Lefty");
 				Controller.turnLeft = true;
+				Controller.turnRight = false;
 			}
 			if(newX == oldX) {
 				System.out.println("Stilly");
@@ -138,6 +141,8 @@ public class Display extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
+		g.setFont(new Font("Verdana", 0, 20));
+		g.drawString("Nordic", 40, 40);
 		g.dispose();
 		bs.show();
 		
