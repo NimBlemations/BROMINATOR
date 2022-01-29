@@ -1,5 +1,6 @@
 //Big thanks to "The Cherno" for his "3D Game Programming in Java".
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -28,6 +29,9 @@ public class Display extends Canvas implements Runnable {
 	private InputHandler input;
 	private int newX = 0;
 	private int oldX = 0;
+	private int fps;
+	
+	private String loosey; //Righty, Lefty, Stilly
 	
 	public Display() {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
@@ -91,6 +95,7 @@ public class Display extends Canvas implements Runnable {
 				tickCount++;
 				if(tickCount % 60 == 0) {
 					System.out.println(frames + "fps");
+					fps = frames;
 					previousTime += 1000;
 					frames = 0;
 				}
@@ -104,17 +109,17 @@ public class Display extends Canvas implements Runnable {
 			
 			newX = InputHandler.MouseX;
 			if(newX > oldX) {
-				System.out.println("Righty");
+				loosey = "Righty"; //String loosey
 				Controller.turnRight = true;
 				Controller.turnLeft = false;
 			}
 			if(newX < oldX) {
-				System.out.println("Lefty");
+				loosey = "Lefty"; //String loosey
 				Controller.turnLeft = true;
 				Controller.turnRight = false;
 			}
 			if(newX == oldX) {
-				System.out.println("Stilly");
+				loosey = "Stilly"; //String loosey
 				Controller.turnLeft = false;
 				Controller.turnRight = false;
 			}
@@ -141,8 +146,14 @@ public class Display extends Canvas implements Runnable {
 		
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(img, 0, 0, WIDTH, HEIGHT, null);
-		g.setFont(new Font("Verdana", 0, 20));
-		g.drawString("Nordic", 40, 40);
+		try {
+			g.setFont(new Font("Comic Sans MS", 1, 20));
+		}catch(Exception e) {
+			System.out.println("Font not found!!!");
+		}
+		g.setColor(Color.WHITE);
+		g.drawString(fps + " FPS", 20, 20);
+		g.drawString(loosey, 100, 20); //String loosey
 		g.dispose();
 		bs.show();
 		
