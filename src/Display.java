@@ -73,9 +73,9 @@ public class Display extends Canvas implements Runnable {
 			while(delta >= 1) {
 				update();
 				delta--;
+				render();
+				frames++;
 			}
-			render();
-			frames++;
 			
 			if(System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
@@ -125,6 +125,6 @@ public class Display extends Canvas implements Runnable {
 	}
 	
 	private void update() {
-		
+		this.tetra.rotate(true, 1, 0, 0);
 	}
 }
