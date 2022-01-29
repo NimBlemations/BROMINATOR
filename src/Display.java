@@ -98,7 +98,6 @@ public class Display extends Canvas implements Runnable {
 		MyPoint p7 =  new MyPoint(-s/2, s/2, s/2);
 		MyPoint p8 =  new MyPoint(-s/2, -s/2, s/2);
 		this.tetra = new Tetrahedron(
-			Color.BLUE,
 			new MyPolygon(Color.RED, p1, p2, p3, p4),
 			new MyPolygon(Color.BLUE, p5, p6, p7, p8),
 			new MyPolygon(Color.WHITE, p1, p2, p5, p6),
