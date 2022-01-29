@@ -36,7 +36,7 @@ public class Render3D extends Render {
 				zBuffer[x + y * width] = z;
 				pixels[x + y * width] = ((xPix & 15) * 16) | ((yPix & 15) * 16) << 8;
 				
-				if (z > 200) {
+				if (z > 500) {
 					pixels[x + y * width] = 0;
 				}
 			}
@@ -60,9 +60,10 @@ public class Render3D extends Render {
 			int g =  (colour >> 8) & 0xff;
 			int b = (colour) & 0xff;
 			
-			r = r * brightness / 255;
-			g = g * brightness / 255;
-			b = b * brightness / 255;
+			//Thanks to gossfunkel for being a commenter in Episode 13 of "3D Game Programming" for suggesting ">>> 8" instead of "/ 255"
+			r = r * brightness >>> 8;
+			g = g * brightness >>> 8;
+			b = b * brightness >>> 8;
 			
 			pixels[i] = r << 16 | g << 8 | b;
 		}
