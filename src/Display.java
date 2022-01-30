@@ -143,6 +143,11 @@ public class Display extends Canvas implements Runnable {
 			
 			this.tetra.rotate(true, 0, -yDif, -xDif);
 		}
+		else if(this.mouse.getButton() == ClickType.RightClick) {
+			int xDif = x - initialX;
+			
+			this.tetra.rotate(true, -xDif, 0, 0);
+		}
 		
 		initialX = x;
 		initialY = y;
