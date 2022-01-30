@@ -30,9 +30,25 @@ public class PointConverter {
 	
 	public static void rotateAxisX(MyPoint p, boolean CW, double degrees) {
 		double radius = Math.sqrt(p.y * p.y + p.z * p.z);
-		double theta = Math.atan2(p.y, p.z);
-		theta += 2 * Math.PI / 360 * degrees * (CW ? 1 : -1);
-		p.y = radius * Math.sin(theta);
+		double theta = Math.atan2(p.z, p.y);
+		theta += 2 * Math.PI / 360 * degrees * (CW ? -1 : 1);
+		p.y = radius * Math.cos(theta);
+		p.z = radius * Math.sin(theta);
+	}
+	
+	public static void rotateAxisY(MyPoint p, boolean CW, double degrees) {
+		double radius = Math.sqrt(p.x * p.x + p.z * p.z);
+		double theta = Math.atan2(p.x, p.z);
+		theta += 2 * Math.PI / 360 * degrees * (CW ? -1 : 1);
 		p.z = radius * Math.cos(theta);
+		p.x = radius * Math.sin(theta);
+	}
+	
+	public static void rotateAxisZ(MyPoint p, boolean CW, double degrees) {
+		double radius = Math.sqrt(p.x * p.x + p.y * p.y);
+		double theta = Math.atan2(p.y, p.x);
+		theta += 2 * Math.PI / 360 * degrees * (CW ? -1 : 1);
+		p.x = radius * Math.cos(theta);
+		p.y = radius * Math.sin(theta);
 	}
 }

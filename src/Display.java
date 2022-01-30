@@ -125,6 +125,6 @@ public class Display extends Canvas implements Runnable {
 	}
 	
 	private void update() {
-		this.tetra.rotate(true, 1, 0, 0);
+		this.tetra.rotate(true, 0, 1, 1);
 	}
 }
