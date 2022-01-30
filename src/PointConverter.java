@@ -4,6 +4,15 @@ public class PointConverter {
 	//I am going to re-map these coordinates later, this is ridiculous.
 	
 	private static double scale = 1;
+	private static final double ZoomFactor = 1.2;
+	
+	public static void zoomIn() {
+		scale *= ZoomFactor;
+	}
+	
+	public static void zoomOut() {
+		scale /= ZoomFactor;
+	}
 	
 	public static Point convertPoint(MyPoint point3D) {
 		double x3d = point3D.y * scale;

@@ -18,6 +18,18 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		return this.mouseY;
 	}
 	
+	public boolean isScrollingUp() {
+		return this.scroll == -1;
+	}
+	
+	public boolean isScrollingDown() {
+		return this.scroll == 1;
+	}
+	
+	public void resetScroll() {
+		this.scroll = 0;
+	}
+	
 	public ClickType getButton() {
 		switch(this.mouseB) {
 			case 1:
@@ -40,8 +52,8 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	}
 	
 	@Override
-	public void mouseWheelMoved(MouseWheelEvent arg0) {
-		
+	public void mouseWheelMoved(MouseWheelEvent event) {
+		scroll = event.getWheelRotation();
 	}
 	
 	@Override
@@ -59,18 +71,18 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	}
 	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent event) {
 		//Press and release mouse
 		
 	}
 	
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseEntered(MouseEvent event) {
 		
 	}
 	
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mouseExited(MouseEvent event) {
 		
 	}
 	
@@ -80,7 +92,7 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	}
 	
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent event) {
 		this.mouseB = -1;
 	}
 }

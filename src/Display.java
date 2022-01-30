@@ -149,6 +149,15 @@ public class Display extends Canvas implements Runnable {
 			this.tetra.rotate(true, -xDif, 0, 0);
 		}
 		
+		if(this.mouse.isScrollingUp()) {
+			PointConverter.zoomIn();
+		}
+		else if(this.mouse.isScrollingDown()) {
+			PointConverter.zoomOut();
+		}
+		
+		this.mouse.resetScroll();
+		
 		initialX = x;
 		initialY = y;
 	}
