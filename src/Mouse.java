@@ -81,6 +81,6 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		
+		this.mouseB = -1;
 	}
 }
