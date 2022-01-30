@@ -135,5 +135,8 @@ public class Display extends Canvas implements Runnable {
 	private void update() {
 		this.tetra.rotate(true, 0, 1, 1);
 		//System.out.println(this.mouse.getX() + ", " + this.mouse.getY());
+		System.out.println(this.mouse.getButton());
+		
+		this.mouse.resetButton();
 	}
 }

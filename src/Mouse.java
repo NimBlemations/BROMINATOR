@@ -22,6 +22,10 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		return this.mouseB;
 	}
 	
+	public void resetButton() {
+		this.mouseB = -1;
+	}
+	
 	@Override
 	public void mouseWheelMoved(MouseWheelEvent arg0) {
 		
@@ -58,8 +62,8 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 	}
 	
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		
+	public void mousePressed(MouseEvent event) {
+		this.mouseB = event.getButton();
 	}
 	
 	@Override
