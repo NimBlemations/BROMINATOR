@@ -20,7 +20,7 @@ public class PointConverter {
 		double dist = Math.sqrt(x3d * x3d + y3d * y3d);
 		double theta = Math.atan2(y3d, x3d);
 		double depth2 = 15 - depth;
-		double localScale = Math.abs(1400 / (depth2 + 1400));
+		double localScale = Math.abs(140 / (depth2 + 140));
 		dist *= localScale;
 		double[] newVal = new double[2];
 		newVal[0] = dist * Math.cos(theta);

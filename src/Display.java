@@ -19,11 +19,19 @@ public class Display extends Canvas implements Runnable {
 	
 	private Tetrahedron tetra;
 	
+	private Mouse mouse;
+	
 	public Display() {
 		this.frame = new JFrame();
 		
 		Dimension size = new Dimension(WIDTH, HEIGHT);
 		this.setPreferredSize(size);
+		
+		this.mouse = new Mouse();
+		
+		this.addMouseListener(this.mouse);
+		this.addMouseMotionListener(this.mouse);
+		this.addMouseWheelListener(this.mouse);
 	}
 	
 	public static void main(String[] args) {
@@ -126,5 +134,6 @@ public class Display extends Canvas implements Runnable {
 	
 	private void update() {
 		this.tetra.rotate(true, 0, 1, 1);
+		//System.out.println(this.mouse.getX() + ", " + this.mouse.getY());
 	}
 }
