@@ -132,11 +132,19 @@ public class Display extends Canvas implements Runnable {
 		bs.show();
 	}
 	
+	ClickType prevMouse = ClickType.Unknown;
+	int initialX, initialY;
 	private void update() {
-		this.tetra.rotate(true, 0, 1, 1);
-		//System.out.println(this.mouse.getX() + ", " + this.mouse.getY());
-		System.out.println(this.mouse.getButton());
+		int x = this.mouse.getX();
+		int y = this.mouse.getY();
+		if(this.mouse.getButton() == ClickType.LeftClick) {
+			int xDif = x - initialX;
+			int yDif = y - initialY;
+			
+			this.tetra.rotate(true, 0, -yDif, -xDif);
+		}
 		
-		this.mouse.resetButton();
+		initialX = x;
+		initialY = y;
 	}
 }

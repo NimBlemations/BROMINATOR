@@ -18,8 +18,21 @@ public class Mouse implements MouseListener, MouseMotionListener, MouseWheelList
 		return this.mouseY;
 	}
 	
-	public int getButton() {
-		return this.mouseB;
+	public ClickType getButton() {
+		switch(this.mouseB) {
+			case 1:
+				return ClickType.LeftClick;
+			case 2:
+				return ClickType.ScrollClick;
+			case 3:
+				return ClickType.RightClick;
+			case 4:
+				return ClickType.ForwardPage;
+			case 5:
+				return ClickType.BackPage;
+			default:
+				return ClickType.Unknown;
+		}
 	}
 	
 	public void resetButton() {
