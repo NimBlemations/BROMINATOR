@@ -13,7 +13,7 @@ public class EntityManager {
 	}
 	
 	public void init() {
-		this.entities.add(BasicEntityBuilder.createDiamond(new Color(200, 40, 150), 100, 0, 0, 0));
+		this.entities.add(ComplexEntityBuilder.createRubiksCube(100, 0, 0, 0));
 	}
 	
 	public void update(Mouse mouse) {

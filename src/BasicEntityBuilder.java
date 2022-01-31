@@ -31,7 +31,7 @@ public class BasicEntityBuilder {
 	public static IEntity createDiamond(Color color, double size, double centerX, double centerY, double centerZ) {
 		List<Tetrahedron> tetras = new ArrayList<Tetrahedron>();
 		
-		int edges = 100;
+		int edges = 20;
 		double inFactor = 0.8;
 		MyPoint bottom = new MyPoint(centerX, centerY, centerZ - size / 2);
 		MyPoint[] outerPoints = new MyPoint[edges];
@@ -41,8 +41,8 @@ public class BasicEntityBuilder {
 			double xPos = -Math.sin(theta) * size / 2;
 			double yPos = -Math.cos(theta) * size / 2;
 			double zPos = size / 2;
-			outerPoints[i] = new MyPoint(centerX + xPos, centerY + yPos, centerZ + zPos);
-			innerPoints[i] = new MyPoint(centerX + xPos * inFactor, centerY + yPos * inFactor, centerZ + zPos / inFactor);
+			outerPoints[i] = new MyPoint(centerX + xPos, centerY + yPos, centerZ + zPos * inFactor);
+			innerPoints[i] = new MyPoint(centerX + xPos * inFactor, centerY + yPos * inFactor, centerZ + zPos);
 		}
 		
 		MyPolygon polygons[] = new MyPolygon[2 * edges + 1];

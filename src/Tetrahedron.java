@@ -14,11 +14,13 @@ public class Tetrahedron {
 		else {
 			this.setPolygonsColor();
 		}
+		this.sortPolygons();
 	}
 	
 	public Tetrahedron(MyPolygon... polygons) {
 		this.color = Color.WHITE;
 		this.polygons = polygons;
+		this.sortPolygons();
 	}
 	
 	public void render(Graphics g) {
@@ -32,6 +34,10 @@ public class Tetrahedron {
 			p.rotate(CW, xDegrees, yDegrees, zDegrees);
 		}
 		this.sortPolygons();
+	}
+	
+	public MyPolygon[] getPolygons() {
+		return this.polygons;
 	}
 	
 	private void sortPolygons() {
