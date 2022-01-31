@@ -27,11 +27,17 @@ public class Entity implements IEntity {
 	}
 	
 	@Override
-	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees) {
+	public void rotate(boolean CW, double xDegrees, double yDegrees, double zDegrees, MyVector lightVector) {
 		for(Tetrahedron tetra : this.tetrahedrons) {
-			tetra.rotate(CW, xDegrees, yDegrees, zDegrees);
+			tetra.rotate(CW, xDegrees, yDegrees, zDegrees, lightVector);
 		}
 		this.sortPolygons();
+	}
+	
+	public void setLighting(MyVector lightVector) {
+		for(Tetrahedron tetra : this.tetrahedrons) {
+			tetra.setLighting(lightVector);
+		}
 	}
 	
 	private void sortPolygons() {

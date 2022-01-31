@@ -27,10 +27,10 @@ public class ComplexEntityBuilder {
 					
 					MyPolygon polyRed = new MyPolygon(Color.RED, p5, p6, p8, p7);
 					MyPolygon polyWhite = new MyPolygon(Color.WHITE, p2, p4, p8, p6);
-					MyPolygon polyBlue = new MyPolygon(Color.BLUE, p3, p4, p8, p7);
+					MyPolygon polyBlue = new MyPolygon(Color.BLUE, p3, p7, p8, p4);
 					MyPolygon polyGreen = new MyPolygon(Color.GREEN, p1, p2, p6, p5);
-					MyPolygon polyOrange = new MyPolygon(Color.ORANGE, p1, p2, p4, p3);
-					MyPolygon polyYellow = new MyPolygon(Color.YELLOW, p1, p3, p7, p5);
+					MyPolygon polyOrange = new MyPolygon(Color.ORANGE, p1, p3, p4, p2);
+					MyPolygon polyYellow = new MyPolygon(Color.YELLOW, p1, p5, p7, p3);
 					
 					Tetrahedron tetra = new Tetrahedron(polyRed, polyWhite, polyBlue, polyGreen, polyOrange, polyYellow);
 					tetras.add(tetra);

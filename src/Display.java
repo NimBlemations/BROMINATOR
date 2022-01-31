@@ -19,7 +19,7 @@ public class Display extends Canvas implements Runnable {
 	
 	private EntityManager entityManager;
 	
-	private Mouse mouse;
+	private UserInput userInput;
 	
 	public Display() {
 		this.frame = new JFrame();
@@ -27,13 +27,14 @@ public class Display extends Canvas implements Runnable {
 		Dimension size = new Dimension(WIDTH, HEIGHT);
 		this.setPreferredSize(size);
 		
-		this.mouse = new Mouse();
+		this.userInput = new UserInput();
 		
 		this.entityManager = new EntityManager();
 		
-		this.addMouseListener(this.mouse);
-		this.addMouseMotionListener(this.mouse);
-		this.addMouseWheelListener(this.mouse);
+		this.addMouseListener(this.userInput.mouse);
+		this.addMouseMotionListener(this.userInput.mouse);
+		this.addMouseWheelListener(this.userInput.mouse);
+		this.addKeyListener(this.userInput.keyboard);
 	}
 	
 	public static void main(String[] args) {
@@ -74,7 +75,7 @@ public class Display extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 		
-		this.entityManager.init();
+		this.entityManager.init(this.userInput);
 		
 		while(running) {
 			long now = System.nanoTime();
@@ -116,6 +117,6 @@ public class Display extends Canvas implements Runnable {
 	}
 	
 	private void update() {
-		this.entityManager.update(this.mouse);
+		this.entityManager.update();
 	}
 }
